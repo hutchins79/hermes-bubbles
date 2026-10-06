@@ -2,7 +2,7 @@
 
 Messages-style chat bubbles for [Hermes Desktop](https://hermes-agent.nousresearch.com/), in light and dark.
 
-Your messages sit on the right in a colored bubble that hugs the text, with a tail like in Messages. Hermes' replies sit on the left in grey bubbles. Tool activity, approvals and status rows stay outside the bubbles, so long agent turns still read cleanly.
+Your messages sit on the right in a colored bubble that hugs the text, with a tail like in Messages. Hermes' replies sit on the left in grey bubbles, also with a tail; replies with code or tables get a wider bubble without one. Tool activity, approvals and status rows stay outside the bubbles, so long agent turns still read cleanly.
 
 | Bubbles Blue, light | Bubbles Blue, dark |
 | --- | --- |
@@ -15,9 +15,6 @@ Your messages sit on the right in a colored bubble that hugs the text, with a ta
 | Bubbles Graphite, light | Bubbles Graphite, dark |
 | --- | --- |
 | ![Bubbles Graphite light](images/bubbles-graphite-light.png) | ![Bubbles Graphite dark](images/bubbles-graphite-dark.png) |
-
-<details>
-<summary>More themes: Grape, Sunset, Midnight, Bubblegum, Mint, Peach</summary>
 
 | Bubbles Grape, light | Bubbles Grape, dark |
 | --- | --- |
@@ -43,17 +40,21 @@ Your messages sit on the right in a colored bubble that hugs the text, with a ta
 | --- | --- |
 | ![Bubbles Peach light](images/bubbles-peach-light.png) | ![Bubbles Peach dark](images/bubbles-peach-dark.png) |
 
-</details>
-
 <sub>Screenshots from Hermes Desktop on Windows.</sub>
 
 ## Themes
 
-- **Bubbles Blue**: classic blue sent bubbles, grey received bubbles.
-- **Bubbles Green**: SMS-style green sent bubbles. The green is a shade deeper than the stock one so white text stays readable.
-- **Bubbles Graphite**: neutral grey sent bubbles, for when you'd rather not have color.
-- **Bubbles Grape**, **Bubbles Sunset** and **Bubbles Midnight**: bold purple, burnt orange and deep navy, with white text.
-- **Bubbles Bubblegum**, **Bubbles Mint** and **Bubbles Peach**: pastels. In light mode they use dark text, since white on a pastel is unreadable; in dark mode they switch to a deeper shade with white text.
+- **Bubbles Blue**: classic Messages blue (`#007AFF` light, `#0A84FF` dark) with white text.
+- **Bubbles Green**: SMS-style green (`#259A42`) with white text. A shade deeper than the stock SMS green so the text stays readable.
+- **Bubbles Graphite**: neutral grey (`#48484A` light, `#636366` dark) with white text, for when you'd rather not have color.
+- **Bubbles Grape**: rich purple (`#7B3FD1` light, `#8A55DB` dark) with white text.
+- **Bubbles Sunset**: burnt orange (`#C8430B` light, `#D9480F` dark) with white text.
+- **Bubbles Midnight**: deep navy (`#1E3A8A` light, `#2E4FB8` dark) with white text.
+- **Bubbles Bubblegum**: pastel pink (`#F7B8D2`) with dark text in light mode; deep pink (`#C2185B`) with white text in dark mode.
+- **Bubbles Mint**: pastel mint (`#A8E6C9`) with dark text in light mode; deep green (`#1A7F5A`) with white text in dark mode.
+- **Bubbles Peach**: pastel peach (`#FFC9A8`) with dark text in light mode; deep peach (`#B4532A`) with white text in dark mode.
+
+Every theme uses the same grey bubbles for Hermes' replies. The pastels switch to deeper shades in dark mode because a light pastel on a black screen glares, and white text on a pastel is unreadable.
 
 Each theme has a light and a dark palette and follows Hermes' own light/dark/system mode (Shift+X toggles it).
 
@@ -70,7 +71,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1
 Select-String -Path "$dir\plugin.js" -Pattern "const VERSION"   # should print 1.2.0
 ```
 
-Run all three lines in the same PowerShell window; `$dir` doesn't carry over to a new one.
+Run all four lines in the same PowerShell window; `$dir` doesn't carry over to a new one.
 
 This is the default Windows location (`C:\Users\<you>\AppData\Local\hermes`). If you set `HERMES_HOME`, use `$env:HERMES_HOME\desktop-plugins\hermes-bubbles` instead.
 
@@ -108,7 +109,7 @@ To update, re-run the install command with the newest version tag (see [tags](ht
 
 `desktop/plugin.js` registers nine themes through the Desktop plugin SDK's `THEMES_AREA`. Each theme carries:
 
-- `colors` and `darkColors`: the light and dark palettes (Apple system greys, blue `#007AFF` / `#0A84FF`).
+- `colors` and `darkColors`: the light and dark palettes: Apple's system greys for the window, plus the theme's bubble and accent colors.
 - `typography`: the system UI font (SF Pro on macOS, Segoe UI on Windows). No fonts are bundled or downloaded.
 - `customCSS`: the bubble layout. Hermes injects it when the theme is applied and removes it when you switch away, so the plugin never touches the DOM itself.
 
@@ -122,7 +123,7 @@ No build step. Edit `desktop/plugin.js` in place under `desktop-plugins/hermes-b
 
 ```bash
 node --check desktop/plugin.js
-hermes plugins validate .   # passes on v1.0.0
+hermes plugins validate .   # passes on v1.2.0
 ```
 
 Issues and pull requests are welcome, especially screenshots from real Hermes Desktop setups.
