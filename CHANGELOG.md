@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2 — 2026-10-06
+
+- Fix: the reply tail no longer covers the first letter of the last line.
+- README: install from a version tag, with a one-line check of what's installed. Screenshots updated to show tails.
+
 ## 1.1.1 — 2026-10-06
 
 - Fix: bubble tails now cover the whole rounded corner, so there's no notch where the tail meets the bubble.

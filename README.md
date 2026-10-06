@@ -2,7 +2,7 @@
 
 Messages-style chat bubbles for [Hermes Desktop](https://hermes-agent.nousresearch.com/), in light and dark.
 
-Your messages sit on the right in a colored bubble that hugs the text. Hermes' replies sit on the left in grey bubbles. Tool activity, approvals and status rows stay outside the bubbles, so long agent turns still read cleanly.
+Your messages sit on the right in a colored bubble that hugs the text, with a tail like in Messages. Hermes' replies sit on the left in grey bubbles. Tool activity, approvals and status rows stay outside the bubbles, so long agent turns still read cleanly.
 
 | Bubbles, light | Bubbles, dark |
 | --- | --- |
@@ -31,8 +31,11 @@ Desktop plugins load from the computer that runs Hermes Desktop, not from the ga
 ```powershell
 $dir = "$env:LOCALAPPDATA\hermes\desktop-plugins\hermes-bubbles"
 New-Item -ItemType Directory -Force $dir | Out-Null
-Invoke-WebRequest https://raw.githubusercontent.com/hutchins79/hermes-bubbles/main/desktop/plugin.js -OutFile "$dir\plugin.js"
+Invoke-WebRequest https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.1.2/desktop/plugin.js -OutFile "$dir\plugin.js"
+Select-String -Path "$dir\plugin.js" -Pattern "const VERSION"   # should print 1.1.2
 ```
+
+Run all three lines in the same PowerShell window; `$dir` doesn't carry over to a new one.
 
 This is the default Windows location (`C:\Users\<you>\AppData\Local\hermes`). If you set `HERMES_HOME`, use `$env:HERMES_HOME\desktop-plugins\hermes-bubbles` instead.
 
@@ -41,7 +44,8 @@ This is the default Windows location (`C:\Users\<you>\AppData\Local\hermes`). If
 ```bash
 dir="${HERMES_HOME:-$HOME/.hermes}/desktop-plugins/hermes-bubbles"
 mkdir -p "$dir"
-curl -fsSL https://raw.githubusercontent.com/hutchins79/hermes-bubbles/main/desktop/plugin.js -o "$dir/plugin.js"
+curl -fsSL https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.1.2/desktop/plugin.js -o "$dir/plugin.js"
+grep "const VERSION" "$dir/plugin.js"   # should print 1.1.2
 ```
 
 If you set `HERMES_HOME`, it overrides `~/.hermes`.
@@ -63,7 +67,7 @@ hermes plugins enable hermes-bubbles
 
 ## Update or remove
 
-Re-run the install command to update. To remove, switch to another theme first, then delete the `hermes-bubbles` folder from `desktop-plugins` (or run `hermes plugins remove hermes-bubbles`).
+To update, re-run the install command with the newest version tag (see [tags](https://github.com/hutchins79/hermes-bubbles/tags)), then **Reload desktop plugins**. Installing from a tag avoids GitHub's few-minute cache on `main`, which can hand you the previous version right after a release. To remove, switch to another theme first, then delete the `hermes-bubbles` folder from `desktop-plugins` (or run `hermes plugins remove hermes-bubbles`).
 
 ## How it works
 

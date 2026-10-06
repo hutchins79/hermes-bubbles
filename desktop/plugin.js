@@ -10,7 +10,7 @@
 import { THEMES_AREA } from '@hermes/plugin-sdk'
 
 const ID = 'hermes-bubbles'
-const VERSION = '1.1.1'
+const VERSION = '1.1.2'
 
 // System UI stack: SF Pro on macOS, Segoe UI Variable / Segoe UI on Windows.
 // Nothing is bundled or downloaded (SF Pro can't be redistributed).
@@ -169,6 +169,7 @@ function bubbleCSS({ meLight, meDark }) {
    tables) keep Hermes' clip and go without a tail. */
 :is(div, span):has(> .composer-human-message) {
   position: relative;
+  isolation: isolate;
 }
 :is(div, span):has(> .composer-human-message)::after,
 [data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img))::after {
@@ -180,6 +181,8 @@ function bubbleCSS({ meLight, meDark }) {
   width: 1.5rem;
   height: 1.125rem;
   pointer-events: none;
+  /* Behind the bubble's text; the parent isolates, so it stays above the page. */
+  z-index: -1;
 }
 :is(div, span):has(> .composer-human-message)::after {
   right: -0.375rem;
@@ -189,6 +192,7 @@ function bubbleCSS({ meLight, meDark }) {
 [data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img)) {
   position: relative;
   overflow: visible;
+  isolation: isolate;
 }
 [data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img))::after {
   left: -0.375rem;
