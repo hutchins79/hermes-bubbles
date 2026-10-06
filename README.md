@@ -4,9 +4,9 @@ Messages-style chat bubbles for [Hermes Desktop](https://hermes-agent.nousresear
 
 Your messages sit on the right in a colored bubble that hugs the text, with a tail like in Messages. Hermes' replies sit on the left in grey bubbles. Tool activity, approvals and status rows stay outside the bubbles, so long agent turns still read cleanly.
 
-| Bubbles, light | Bubbles, dark |
+| Bubbles Blue, light | Bubbles Blue, dark |
 | --- | --- |
-| ![Bubbles light](images/bubbles-light.png) | ![Bubbles dark](images/bubbles-dark.png) |
+| ![Bubbles Blue light](images/bubbles-light.png) | ![Bubbles Blue dark](images/bubbles-dark.png) |
 
 | Bubbles Green, light | Bubbles Green, dark |
 | --- | --- |
@@ -20,9 +20,11 @@ Your messages sit on the right in a colored bubble that hugs the text, with a ta
 
 ## Themes
 
-- **Bubbles**: classic blue sent bubbles, grey received bubbles.
+- **Bubbles Blue**: classic blue sent bubbles, grey received bubbles.
 - **Bubbles Green**: SMS-style green sent bubbles. The green is a shade deeper than the stock one so white text stays readable.
 - **Bubbles Graphite**: neutral grey sent bubbles, for when you'd rather not have color.
+- **Bubbles Grape**, **Bubbles Sunset** and **Bubbles Midnight**: bold purple, burnt orange and deep navy, with white text.
+- **Bubbles Bubblegum**, **Bubbles Mint** and **Bubbles Peach**: pastels. In light mode they use dark text, since white on a pastel is unreadable; in dark mode they switch to a deeper shade with white text.
 
 Each theme has a light and a dark palette and follows Hermes' own light/dark/system mode (Shift+X toggles it).
 
@@ -35,8 +37,8 @@ Desktop plugins load from the computer that runs Hermes Desktop, not from the ga
 ```powershell
 $dir = "$env:LOCALAPPDATA\hermes\desktop-plugins\hermes-bubbles"
 New-Item -ItemType Directory -Force $dir | Out-Null
-Invoke-WebRequest https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.1.2/desktop/plugin.js -OutFile "$dir\plugin.js"
-Select-String -Path "$dir\plugin.js" -Pattern "const VERSION"   # should print 1.1.2
+Invoke-WebRequest https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.2.0/desktop/plugin.js -OutFile "$dir\plugin.js"
+Select-String -Path "$dir\plugin.js" -Pattern "const VERSION"   # should print 1.2.0
 ```
 
 Run all three lines in the same PowerShell window; `$dir` doesn't carry over to a new one.
@@ -48,8 +50,8 @@ This is the default Windows location (`C:\Users\<you>\AppData\Local\hermes`). If
 ```bash
 dir="${HERMES_HOME:-$HOME/.hermes}/desktop-plugins/hermes-bubbles"
 mkdir -p "$dir"
-curl -fsSL https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.1.2/desktop/plugin.js -o "$dir/plugin.js"
-grep "const VERSION" "$dir/plugin.js"   # should print 1.1.2
+curl -fsSL https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.2.0/desktop/plugin.js -o "$dir/plugin.js"
+grep "const VERSION" "$dir/plugin.js"   # should print 1.2.0
 ```
 
 If you set `HERMES_HOME`, it overrides `~/.hermes`.
@@ -67,7 +69,7 @@ hermes plugins enable hermes-bubbles
 
 1. Hermes Desktop picks up the plugin within a few seconds. If it doesn't, run **Reload desktop plugins** from the command palette.
 2. Make sure **Hermes Bubbles** is enabled under **Capabilities → Plugins**.
-3. Choose **Bubbles** or **Bubbles Green** in **Settings → Appearance → Theme**.
+3. Choose any **Bubbles** theme in **Settings → Appearance → Theme**.
 
 ## Update or remove
 
@@ -75,7 +77,7 @@ To update, re-run the install command with the newest version tag (see [tags](ht
 
 ## How it works
 
-`desktop/plugin.js` registers three themes through the Desktop plugin SDK's `THEMES_AREA`. Each theme carries:
+`desktop/plugin.js` registers nine themes through the Desktop plugin SDK's `THEMES_AREA`. Each theme carries:
 
 - `colors` and `darkColors`: the light and dark palettes (Apple system greys, blue `#007AFF` / `#0A84FF`).
 - `typography`: the system UI font (SF Pro on macOS, Segoe UI on Windows). No fonts are bundled or downloaded.

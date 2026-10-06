@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 — 2026-10-06
+
+- New themes: **Grape**, **Sunset**, **Midnight**, **Bubblegum**, **Mint** and **Peach**.
+- Pastel themes use dark text in your bubbles in light mode, and a deeper shade with white text in dark mode.
+- **Bubbles** is now labeled **Bubbles Blue**. Its id is unchanged, so your theme selection carries over.
+- Inline code, text selection and the edit caret in your bubbles follow the bubble's text color.
+
 ## 1.1.2 — 2026-10-06
 
 - Fix: the reply tail no longer covers the first letter of the last line.

@@ -10,7 +10,7 @@
 import { THEMES_AREA } from '@hermes/plugin-sdk'
 
 const ID = 'hermes-bubbles'
-const VERSION = '1.1.2'
+const VERSION = '1.2.0'
 
 // System UI stack: SF Pro on macOS, Segoe UI Variable / Segoe UI on Windows.
 // Nothing is bundled or downloaded (SF Pro can't be redistributed).
@@ -75,11 +75,11 @@ const THEM_DARK = '#26252A'
 //                                     a reply's prose (tool rows sit outside it)
 // `:root.dark` is toggled by Hermes when the dark palette is painted.
 
-function bubbleCSS({ meLight, meDark }) {
+function bubbleCSS({ meLight, meDark, meFgLight, meFgDark }) {
   return `
 :root {
   --bubbles-me: ${meLight};
-  --bubbles-me-fg: #FFFFFF;
+  --bubbles-me-fg: ${meFgLight};
   --bubbles-them: ${THEM_LIGHT};
   --bubbles-radius: 1.125rem;
   /* Keeps Settings -> Appearance -> Message Bubble transparency working. */
@@ -87,6 +87,7 @@ function bubbleCSS({ meLight, meDark }) {
 }
 :root.dark {
   --bubbles-me: ${meDark};
+  --bubbles-me-fg: ${meFgDark};
   --bubbles-them: ${THEM_DARK};
 }
 
@@ -109,7 +110,7 @@ function bubbleCSS({ meLight, meDark }) {
   margin-block: 0;
 }
 .composer-human-message :not(pre) > code {
-  background: color-mix(in srgb, #FFFFFF 22%, transparent) !important;
+  background: color-mix(in srgb, var(--bubbles-me-fg) 18%, transparent) !important;
   border-radius: 0.25rem;
   padding: 0.05em 0.3em;
 }
@@ -120,15 +121,15 @@ function bubbleCSS({ meLight, meDark }) {
   color: color-mix(in srgb, var(--bubbles-me-fg) 80%, transparent) !important;
 }
 .composer-human-message ::selection {
-  background: color-mix(in srgb, #FFFFFF 35%, transparent);
-  color: #FFFFFF;
+  background: color-mix(in srgb, var(--bubbles-me-fg) 30%, transparent);
+  color: var(--bubbles-me-fg);
 }
 
 /* Editing a sent message: give the editor the full width back. */
 .composer-human-message:has([data-slot='composer-rich-input']) {
   width: 100% !important;
   max-width: 100% !important;
-  caret-color: #FFFFFF;
+  caret-color: var(--bubbles-me-fg);
 }
 
 /* Sent: Hermes overlays the time/restore cluster on the bubble's last line.
@@ -210,7 +211,14 @@ function bubbleCSS({ meLight, meDark }) {
 
 // ─── Themes ────────────────────────────────────────────────────────────────
 
-function makeTheme({ name, label, description, meLight, meDark, linkLight, linkDark, tintLight, tintDark }) {
+// Sent-bubble text is white unless a theme says otherwise (pastels use dark
+// text in light mode, where white would be unreadable).
+const INK = '#1D1D1F'
+
+function makeTheme({
+  name, label, description, meLight, meDark, linkLight, linkDark, tintLight, tintDark,
+  meFgLight = '#FFFFFF', meFgDark = '#FFFFFF'
+}) {
   return {
     name,
     label,
@@ -240,14 +248,15 @@ function makeTheme({ name, label, description, meLight, meDark, linkLight, linkD
       userBubble: meDark,
       userBubbleBorder: meDark
     },
-    customCSS: bubbleCSS({ meLight, meDark })
+    customCSS: bubbleCSS({ meLight, meDark, meFgLight, meFgDark })
   }
 }
 
 const THEMES = [
   makeTheme({
     name: 'bubbles',
-    label: 'Bubbles',
+    // id stays 'bubbles' so anyone already using it keeps their selection.
+    label: 'Bubbles Blue',
     description: 'Messages-style blue bubbles, light and dark',
     meLight: '#007AFF',
     meDark: '#0A84FF',
@@ -281,6 +290,80 @@ const THEMES = [
     linkDark: '#0A84FF',
     tintLight: '#F2F2F7',
     tintDark: '#2C2C2E'
+  }),
+
+  // ── Bold colors: white text in both modes ──
+  makeTheme({
+    name: 'bubbles-grape',
+    label: 'Bubbles Grape',
+    description: 'Rich purple bubbles, light and dark',
+    meLight: '#7B3FD1', // white text 6.0:1
+    meDark: '#8A55DB', //  white text 4.8:1
+    linkLight: '#7B3FD1',
+    linkDark: '#B08CF0',
+    tintLight: '#F3ECFD',
+    tintDark: '#241638'
+  }),
+  makeTheme({
+    name: 'bubbles-sunset',
+    label: 'Bubbles Sunset',
+    description: 'Burnt-orange bubbles, light and dark',
+    meLight: '#C8430B', // white text 4.9:1
+    meDark: '#D9480F', //  white text 4.3:1
+    linkLight: '#C2410C',
+    linkDark: '#FF8A50',
+    tintLight: '#FFF0E8',
+    tintDark: '#331709'
+  }),
+  makeTheme({
+    name: 'bubbles-midnight',
+    label: 'Bubbles Midnight',
+    description: 'Deep navy bubbles, light and dark',
+    meLight: '#1E3A8A', // white text 10.4:1
+    meDark: '#2E4FB8', //  lifted off the black background; white text 7.2:1
+    linkLight: '#1E40AF',
+    linkDark: '#7A9CFF',
+    tintLight: '#EAF0FF',
+    tintDark: '#111C3D'
+  }),
+
+  // ── Pastels: dark text on a pastel bubble in light mode; a deeper shade
+  //    with white text in dark mode, where pastels would glare. ──
+  makeTheme({
+    name: 'bubbles-bubblegum',
+    label: 'Bubbles Bubblegum',
+    description: 'Pastel pink bubbles, light and dark',
+    meLight: '#F7B8D2', // dark text 10:1
+    meDark: '#C2185B', //  white text 5.9:1
+    meFgLight: INK,
+    linkLight: '#C2185B',
+    linkDark: '#F06292',
+    tintLight: '#FDEEF4',
+    tintDark: '#3A0F21'
+  }),
+  makeTheme({
+    name: 'bubbles-mint',
+    label: 'Bubbles Mint',
+    description: 'Pastel mint bubbles, light and dark',
+    meLight: '#A8E6C9', // dark text 11:1
+    meDark: '#1A7F5A', //  white text 5.0:1
+    meFgLight: INK,
+    linkLight: '#0F7A55',
+    linkDark: '#5FD3A5',
+    tintLight: '#EAF9F1',
+    tintDark: '#0D2A1F'
+  }),
+  makeTheme({
+    name: 'bubbles-peach',
+    label: 'Bubbles Peach',
+    description: 'Pastel peach bubbles, light and dark',
+    meLight: '#FFC9A8', // dark text 11:1
+    meDark: '#B4532A', //  white text 5.0:1
+    meFgLight: INK,
+    linkLight: '#B4532A',
+    linkDark: '#FFAD80',
+    tintLight: '#FFF3EC',
+    tintDark: '#35190C'
   })
 ]
 
