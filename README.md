@@ -12,7 +12,7 @@ Your messages sit on the right in a colored bubble that hugs the text. Hermes' r
 | --- | --- |
 | ![Bubbles Green light](images/bubbles-green-light.png) | ![Bubbles Green dark](images/bubbles-green-dark.png) |
 
-<sub>Previews are rendered mockups of the theme's palette and CSS, not screenshots of the app.</sub>
+<sub>Screenshots from Hermes Desktop on Windows.</sub>
 
 ## Themes
 
@@ -93,7 +93,7 @@ Ideas, not promises:
 
 - **Closer font match:** an opt-in variant that loads Inter (a free font close to SF Pro) through the theme's `fontUrl`. Off by default so the default themes stay download-free.
 - **Bubble tails** like the ones in Messages.
-- **Real screenshots** to replace the mockups above.
+- **More screenshots:** code blocks, tables and the inline edit view.
 - **CLI/TUI skin** to match the desktop theme.
 
 ## Credits
