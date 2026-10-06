@@ -82,10 +82,19 @@ No build step. Edit `desktop/plugin.js` in place under `desktop-plugins/hermes-b
 
 ```bash
 node --check desktop/plugin.js
-hermes plugins validate .
+hermes plugins validate .   # passes on v1.0.0
 ```
 
 Issues and pull requests are welcome, especially screenshots from real Hermes Desktop setups.
+
+## Roadmap
+
+Ideas, not promises:
+
+- **Closer font match:** an opt-in variant that loads Inter (a free font close to SF Pro) through the theme's `fontUrl`. Off by default so the default themes stay download-free.
+- **Bubble tails** like the ones in Messages.
+- **Real screenshots** to replace the mockups above.
+- **CLI/TUI skin** to match the desktop theme.
 
 ## Credits
 
