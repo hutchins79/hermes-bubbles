@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Charles (@hutchins79)
+
+name: hermes-bubbles
+label: Hermes Bubbles
+version: 1.0.0
+manifest_version: 2
+api_version: 1
+description: "Messages-style chat bubbles for Hermes Desktop, in light and dark."
+author: Charles (@hutchins79)
+license: MIT
+homepage: https://github.com/hutchins79/hermes-bubbles
+tags: [desktop, themes, appearance]
+requires_hermes: ">=0.21.3"
