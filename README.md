@@ -18,6 +18,7 @@ Your messages sit on the right in a colored bubble that hugs the text. Hermes' r
 
 - **Bubbles**: classic blue sent bubbles, grey received bubbles.
 - **Bubbles Green**: SMS-style green sent bubbles. The green is a shade deeper than the stock one so white text stays readable.
+- **Bubbles Graphite**: neutral grey sent bubbles, for when you'd rather not have color.
 
 Each theme has a light and a dark palette and follows Hermes' own light/dark/system mode (Shift+X toggles it).
 
@@ -66,7 +67,7 @@ Re-run the install command to update. To remove, switch to another theme first, 
 
 ## How it works
 
-`desktop/plugin.js` registers two themes through the Desktop plugin SDK's `THEMES_AREA`. Each theme carries:
+`desktop/plugin.js` registers three themes through the Desktop plugin SDK's `THEMES_AREA`. Each theme carries:
 
 - `colors` and `darkColors`: the light and dark palettes (Apple system greys, blue `#007AFF` / `#0A84FF`).
 - `typography`: the system UI font (SF Pro on macOS, Segoe UI on Windows). No fonts are bundled or downloaded.
@@ -92,7 +93,7 @@ Issues and pull requests are welcome, especially screenshots from real Hermes De
 Ideas, not promises:
 
 - **Closer font match:** an opt-in variant that loads Inter (a free font close to SF Pro) through the theme's `fontUrl`. Off by default so the default themes stay download-free.
-- **Bubble tails** like the ones in Messages.
+- **Grouping:** tighter corners and a single tail when several messages in a row come from the same side.
 - **More screenshots:** code blocks, tables and the inline edit view.
 - **CLI/TUI skin** to match the desktop theme.
 

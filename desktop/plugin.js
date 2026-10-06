@@ -10,7 +10,7 @@
 import { THEMES_AREA } from '@hermes/plugin-sdk'
 
 const ID = 'hermes-bubbles'
-const VERSION = '1.0.1'
+const VERSION = '1.1.0'
 
 // System UI stack: SF Pro on macOS, Segoe UI Variable / Segoe UI on Windows.
 // Nothing is bundled or downloaded (SF Pro can't be redistributed).
@@ -109,7 +109,9 @@ function bubbleCSS({ meLight, meDark }) {
   margin-block: 0;
 }
 .composer-human-message :not(pre) > code {
-  background: color-mix(in srgb, #FFFFFF 20%, transparent) !important;
+  background: color-mix(in srgb, #FFFFFF 22%, transparent) !important;
+  border-radius: 0.25rem;
+  padding: 0.05em 0.3em;
 }
 .composer-human-message a {
   text-decoration: underline !important;
@@ -148,7 +150,7 @@ function bubbleCSS({ meLight, meDark }) {
 }
 
 /* Replies with code or tables need the room; keep the bubble, drop the hug. */
-[data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table) {
+[data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre) {
   width: 100% !important;
   max-width: 100% !important;
 }
@@ -156,6 +158,46 @@ function bubbleCSS({ meLight, meDark }) {
 /* Code and tables sit on the page color inside the grey bubble. */
 [data-slot='aui_assistant-message-content'] .aui-md.prose :is([data-slot='code-card'], .aui-md-table) {
   background-color: var(--dt-card, var(--ui-bg-editor));
+}
+
+/* ── Tails ──
+   Both bubbles clip their own overflow (Hermes needs that for long prompts
+   and wide code), so a tail can't hang off the bubble itself.
+   Sent: drawn by the bubble's full-width parent, whose right edge is the
+   bubble's right edge. Received: only text-only replies get a tail; they
+   can safely stop clipping because their text wraps. Wide replies (code,
+   tables) keep Hermes' clip and go without a tail. */
+:is(div, span):has(> .composer-human-message) {
+  position: relative;
+}
+:is(div, span):has(> .composer-human-message)::after,
+[data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img))::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 0.875rem;
+  height: 1.125rem;
+  pointer-events: none;
+}
+:is(div, span):has(> .composer-human-message)::after {
+  right: -0.375rem;
+  background: var(--dt-user-bubble);
+  clip-path: path('M0 0 H8 C8 9 9.5 14.5 14 18 C9 18.6 4 18 0 18 Z');
+}
+[data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img)) {
+  position: relative;
+  overflow: visible;
+}
+[data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img))::after {
+  left: -0.375rem;
+  background: var(--bubbles-them);
+  clip-path: path('M14 0 H6 C6 9 4.5 14.5 0 18 C5 18.6 10 18 14 18 Z');
+}
+/* No tail while editing a sent message, or in HUD mode. */
+:is(div, span):has(> .composer-human-message:has([data-slot='composer-rich-input']))::after,
+[data-hud-shell] :is(div, span):has(> .composer-human-message)::after,
+[data-hud-shell] [data-slot='aui_assistant-message-content'] .aui-md.prose::after {
+  content: none;
 }
 `.trim()
 }
@@ -220,6 +262,19 @@ const THEMES = [
     linkDark: '#259A42',
     tintLight: '#EAF8EE',
     tintDark: '#0E2A17'
+  }),
+  makeTheme({
+    name: 'bubbles-graphite',
+    label: 'Bubbles Graphite',
+    description: 'Neutral graphite sent bubbles, light and dark',
+    // Light: dark grey against the light-grey replies. Dark: a lighter grey
+    // so sent and received stay distinct; white text is 9:1 and 6:1.
+    meLight: '#48484A',
+    meDark: '#636366',
+    linkLight: '#007AFF',
+    linkDark: '#0A84FF',
+    tintLight: '#F2F2F7',
+    tintDark: '#2C2C2E'
   })
 ]
 
