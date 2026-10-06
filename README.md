@@ -12,6 +12,10 @@ Your messages sit on the right in a colored bubble that hugs the text, with a ta
 | --- | --- |
 | ![Bubbles Green light](images/bubbles-green-light.png) | ![Bubbles Green dark](images/bubbles-green-dark.png) |
 
+| Bubbles Graphite, light | Bubbles Graphite, dark |
+| --- | --- |
+| ![Bubbles Graphite light](images/bubbles-graphite-light.png) | ![Bubbles Graphite dark](images/bubbles-graphite-dark.png) |
+
 <sub>Screenshots from Hermes Desktop on Windows.</sub>
 
 ## Themes
