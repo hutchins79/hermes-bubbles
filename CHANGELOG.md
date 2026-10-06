@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 — 2026-10-06
+
+- Fix: bubble tails now cover the whole rounded corner, so there's no notch where the tail meets the bubble.
+
 ## 1.1.0 — 2026-10-06
 
 - New: **Bubbles Graphite**, neutral grey sent bubbles in light and dark.

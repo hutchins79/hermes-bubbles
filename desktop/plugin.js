@@ -10,7 +10,7 @@
 import { THEMES_AREA } from '@hermes/plugin-sdk'
 
 const ID = 'hermes-bubbles'
-const VERSION = '1.1.0'
+const VERSION = '1.1.1'
 
 // System UI stack: SF Pro on macOS, Segoe UI Variable / Segoe UI on Windows.
 // Nothing is bundled or downloaded (SF Pro can't be redistributed).
@@ -175,14 +175,16 @@ function bubbleCSS({ meLight, meDark }) {
   content: '';
   position: absolute;
   bottom: 0;
-  width: 0.875rem;
+  /* Wide enough to cover the bubble's whole rounded corner (radius 18px),
+     so the tail meets the flat bottom edge with no notch. */
+  width: 1.5rem;
   height: 1.125rem;
   pointer-events: none;
 }
 :is(div, span):has(> .composer-human-message)::after {
   right: -0.375rem;
   background: var(--dt-user-bubble);
-  clip-path: path('M0 0 H8 C8 9 9.5 14.5 14 18 C9 18.6 4 18 0 18 Z');
+  clip-path: path('M0 0 H18 C18 9 19.5 14.5 24 18 C19 18.6 12 18 0 18 Z');
 }
 [data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img)) {
   position: relative;
@@ -191,7 +193,7 @@ function bubbleCSS({ meLight, meDark }) {
 [data-slot='aui_assistant-message-content'] .aui-md.prose:not(.aui-md .aui-md):not(:has([data-slot='code-card'], [data-streamdown='code-block'], .aui-md-table, pre, img))::after {
   left: -0.375rem;
   background: var(--bubbles-them);
-  clip-path: path('M14 0 H6 C6 9 4.5 14.5 0 18 C5 18.6 10 18 14 18 Z');
+  clip-path: path('M24 0 H6 C6 9 4.5 14.5 0 18 C5 18.6 12 18 24 18 Z');
 }
 /* No tail while editing a sent message, or in HUD mode. */
 :is(div, span):has(> .composer-human-message:has([data-slot='composer-rich-input']))::after,

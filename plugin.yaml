@@ -3,7 +3,7 @@
 
 name: hermes-bubbles
 label: Hermes Bubbles
-version: 1.1.0
+version: 1.1.1
 manifest_version: 2
 api_version: 1
 description: "Messages-style chat bubbles for Hermes Desktop, in light and dark."
