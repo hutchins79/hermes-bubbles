@@ -16,6 +16,35 @@ Your messages sit on the right in a colored bubble that hugs the text, with a ta
 | --- | --- |
 | ![Bubbles Graphite light](images/bubbles-graphite-light.png) | ![Bubbles Graphite dark](images/bubbles-graphite-dark.png) |
 
+<details>
+<summary>More themes: Grape, Sunset, Midnight, Bubblegum, Mint, Peach</summary>
+
+| Bubbles Grape, light | Bubbles Grape, dark |
+| --- | --- |
+| ![Bubbles Grape light](images/bubbles-grape-light.png) | ![Bubbles Grape dark](images/bubbles-grape-dark.png) |
+
+| Bubbles Sunset, light | Bubbles Sunset, dark |
+| --- | --- |
+| ![Bubbles Sunset light](images/bubbles-sunset-light.png) | ![Bubbles Sunset dark](images/bubbles-sunset-dark.png) |
+
+| Bubbles Midnight, light | Bubbles Midnight, dark |
+| --- | --- |
+| ![Bubbles Midnight light](images/bubbles-midnight-light.png) | ![Bubbles Midnight dark](images/bubbles-midnight-dark.png) |
+
+| Bubbles Bubblegum, light | Bubbles Bubblegum, dark |
+| --- | --- |
+| ![Bubbles Bubblegum light](images/bubbles-bubblegum-light.png) | ![Bubbles Bubblegum dark](images/bubbles-bubblegum-dark.png) |
+
+| Bubbles Mint, light | Bubbles Mint, dark |
+| --- | --- |
+| ![Bubbles Mint light](images/bubbles-mint-light.png) | ![Bubbles Mint dark](images/bubbles-mint-dark.png) |
+
+| Bubbles Peach, light | Bubbles Peach, dark |
+| --- | --- |
+| ![Bubbles Peach light](images/bubbles-peach-light.png) | ![Bubbles Peach dark](images/bubbles-peach-dark.png) |
+
+</details>
+
 <sub>Screenshots from Hermes Desktop on Windows.</sub>
 
 ## Themes
