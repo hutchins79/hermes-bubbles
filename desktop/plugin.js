@@ -10,7 +10,7 @@
 import { THEMES_AREA } from '@hermes/plugin-sdk'
 
 const ID = 'hermes-bubbles'
-const VERSION = '1.0.0'
+const VERSION = '1.0.1'
 
 // System UI stack: SF Pro on macOS, Segoe UI Variable / Segoe UI on Windows.
 // Nothing is bundled or downloaded (SF Pro can't be redistributed).
@@ -127,6 +127,15 @@ function bubbleCSS({ meLight, meDark }) {
   width: 100% !important;
   max-width: 100% !important;
   caret-color: #FFFFFF;
+}
+
+/* Sent: Hermes overlays the time/restore cluster on the bubble's last line.
+   Hugging the text removes the room it reserves, so show it below the bubble
+   instead (like "Delivered" in Messages). */
+[data-slot='aui_user-bubble-actions'] .pointer-events-none.absolute.right-2.bottom-2 {
+  bottom: -1.375rem !important;
+  right: 0.25rem !important;
+  background: transparent !important;
 }
 
 /* ── Received: left-aligned grey bubble around the reply text ── */

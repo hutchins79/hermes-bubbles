@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 — 2026-10-06
+
+- Fix: on hover, the sent-message time and restore button no longer cover the end of your text. They now sit just below the bubble.
+
 ## 1.0.0 — 2026-10-06
 
 - First release.
