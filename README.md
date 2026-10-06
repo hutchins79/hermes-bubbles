@@ -28,10 +28,12 @@ Desktop plugins load from the computer that runs Hermes Desktop, not from the ga
 ### Windows (PowerShell)
 
 ```powershell
-$dir = "$env:USERPROFILE\.hermes\desktop-plugins\hermes-bubbles"
+$dir = "$env:LOCALAPPDATA\hermes\desktop-plugins\hermes-bubbles"
 New-Item -ItemType Directory -Force $dir | Out-Null
 Invoke-WebRequest https://raw.githubusercontent.com/hutchins79/hermes-bubbles/main/desktop/plugin.js -OutFile "$dir\plugin.js"
 ```
+
+This is the default Windows location (`C:\Users\<you>\AppData\Local\hermes`). If you set `HERMES_HOME`, use `$env:HERMES_HOME\desktop-plugins\hermes-bubbles` instead.
 
 ### macOS / Linux
 
@@ -41,7 +43,7 @@ mkdir -p "$dir"
 curl -fsSL https://raw.githubusercontent.com/hutchins79/hermes-bubbles/main/desktop/plugin.js -o "$dir/plugin.js"
 ```
 
-If you set `HERMES_HOME`, use that folder instead of `~/.hermes`.
+If you set `HERMES_HOME`, it overrides `~/.hermes`.
 
 ### With the Hermes CLI
 
