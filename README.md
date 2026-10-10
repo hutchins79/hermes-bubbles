@@ -62,6 +62,16 @@ Each theme has a light and a dark palette and follows Hermes' own light/dark/sys
 
 Desktop plugins load from the computer that runs Hermes Desktop, not from the gateway. If your gateway runs on another machine (a VM, a server), install on the desktop machine.
 
+The plugin goes in a `hermes-bubbles` folder inside Hermes' `desktop-plugins` folder:
+
+| OS | Default `desktop-plugins` folder |
+| --- | --- |
+| Windows | `C:\Users\<you>\AppData\Local\hermes\desktop-plugins` |
+| macOS | `/Users/<you>/.hermes/desktop-plugins` |
+| Linux | `/home/<you>/.hermes/desktop-plugins` |
+
+This is not where the app itself is installed (for example `/Applications` on macOS). Not sure where yours is? In Hermes Desktop, open **Capabilities → Plugins** and click **Open Desktop plugins folder**; it opens the exact folder your Hermes loads from.
+
 ### Windows (PowerShell)
 
 ```powershell
@@ -84,7 +94,7 @@ curl -fsSL https://raw.githubusercontent.com/hutchins79/hermes-bubbles/v1.2.0/de
 grep "const VERSION" "$dir/plugin.js"   # should print 1.2.0
 ```
 
-If you set `HERMES_HOME`, it overrides `~/.hermes`.
+`$HOME` (and `~`) is your user folder: `/Users/<you>` on macOS, `/home/<you>` on Linux. `.hermes` starts with a dot, so Finder hides it; press **Cmd+Shift+.** to show hidden folders. If you set `HERMES_HOME`, it overrides `~/.hermes`.
 
 ### With the Hermes CLI
 
